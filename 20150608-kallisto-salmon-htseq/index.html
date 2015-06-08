@@ -72,16 +72,14 @@
 
 <h3>Introduction</h3>
 
-<p>A single read 50 RNA-seq experiment (NEB, riboZero) was used to compare diffential expression with 3 strategies:  HtSeq-count-gene (union,  version 0.6.1p1), salmon-gene (version : 0.3.0) and kallisto-gene (kallisto 0.42.1).
+<p>A single read 50 RNA-seq experiment (NEB, riboZero) was used to compare diffential expression with 3 strategies:  HtSeq-count-gene (union,  version 0.6.1p1), salmon-gene (version : 0.4.0,  --libType SR --unmatedReads --extraSensitive  --biasCorrect, but the bias corrected file was not used) and kallisto-gene (kallisto 0.42.1).
 The reads were aligned to mm10 using star-aligner. Ensembl GRCh38 78 gtf was used as annotation. For salmon (non bias corrected) and kallisto the indices were
 generated from Homo_sapiens.GRCh38.cdna.all.fa.gz and Homo_sapiens.GRCh38.ncrna.fa.gz.
 The experiment consisted of 4 conditions with 2 replicates each. Gene counts were derived from kallisto with a home made script by summing estimated counts/transcripts per gene.
 Differential expression was called using DESeq2.</p>
 <p>Only the comparison for one condition is shown. The other conditions had similar results regarding htseq/kallisto/salmon.</p>
 
-<p>The bottom line is that the overlap between kallisto and HtSeq-count in calling differentially expressed genes is largest. Depending on the p-value treshold, there are about 10-20% called by only htseq or kallisto or salmon.
-About 2% are called by salmon and htseq or kallisto. The majority is called by all three methods and htseq and salmon together. The difference in choosing kallisto or htseq-count is about 15%. Because of the consistency of the differentially expressed genes with
-transcript estimations I will switch to kallisto for most future analyses. 
+<p>The bottom line is that the differences are neglegible. 
 </p>
 
 
@@ -92,7 +90,9 @@ transcript estimations I will switch to kallisto for most future analyses.
 <img src="theresaAlign/plotAnnotation-1.jpg"/>
 
 <h3>Scatter Plots</h3>
-<p>Scatter plots show high correlation between the different methods. Salmon and kallisto have the highest correlation for base mean, however, when comparing the p-values of differential expression, htseq-counts and kallisto are correlating better.</p>  
+<p>Scatter plots show high correlation between the different methods. Numbers are spearman correlation of plotted values. 
+</p>  
+
 
 <div class="chunk" id="basemean"><div class="rimage default"><img src="figure/basemean-1.png" title="plot of chunk basemean" alt="plot of chunk basemean" class="plot" /></div></div>
 
@@ -100,20 +100,22 @@ transcript estimations I will switch to kallisto for most future analyses.
 
 <div class="chunk" id="padj"><div class="rimage default"><img src="figure/padj-1.png" title="plot of chunk padj" alt="plot of chunk padj" class="plot" /></div></div>
 
-<h3>comparison diff expression</h3>
-<p>Testing for the intersections of differentially expressed called genes at different p-value tresholds, the overlap between kallisto and HtSeq-count is the largest. Depending on the p-value treshold, there are about 10-20% called by only htseq or kallisto or salmon.
-About 2% are called by salmon and htseq or kallisto. The majority is called by all three methods or htseq and salmon together. The difference between choosing kallisto or htseq-count is about 15%. Because of the consistency of the differentially expressed genes with
-transcript estimations I will switch to kallisto for most future analyses.
-</p>
+<h3>comparison differential expression</h3>
+
 <div class="chunk" id="padj1"><div class="rimage default"><img src="figure/padj1-1.png" title="plot of chunk padj1" alt="plot of chunk padj1" class="plot" /></div></div>
 
 <div class="chunk" id="padj2"><div class="rimage default"><img src="figure/padj2-1.png" title="plot of chunk padj2" alt="plot of chunk padj2" class="plot" /></div></div>
 
 <div class="chunk" id="padj3"><div class="rimage default"><img src="figure/padj3-1.png" title="plot of chunk padj3" alt="plot of chunk padj3" class="plot" /></div></div>
+
+
 <h3>Summary</h3>
-HtSeq count and kallisto had most of the differentially called genes in common. This study is only anecdotal evidence because the ground truth is not known. The optimum would be if somebody integrates kallisto and salmon
+60% of all the differentially expressed genes are found by all 3 methods. In addition to this 8% are found by htseq and kallisto or salmon and kallisto. Another 8% is found only by HtSeq-count.
+There are only 3% genes found by only kallisto and 6% by only salmon as being differentially expressed. If the methods would be completely independent and genes called by just one method would count as false positives, I would conclude that HtSeq-count has the highest rate of false positives. Kallisto results encompass both sailfish and HtSeq-count, with a very low rate of probably unreliable single method calls. 
+This study is only anecdotal evidence because the ground truth is not known. The optimum would be if somebody integrates kallisto and salmon
 into <a href="https://bitbucket.org/soccin/seqc">seqc</a> where a little bit of ground truth is known.
 
+PS: The first version of this study used salmon v0.3.0 which had dramatically different results.
 </body>
 </html>
 
