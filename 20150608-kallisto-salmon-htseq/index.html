@@ -78,22 +78,21 @@ generated from Homo_sapiens.GRCh38.cdna.all.fa.gz and Homo_sapiens.GRCh38.ncrna.
 The experiment consisted of 4 conditions with 2 replicates each. Gene counts were derived from kallisto with a home made script by summing estimated counts/transcripts per gene.
 Differential expression was called using DESeq2.</p>
 <p>Only the comparison for one condition is shown. The other conditions had similar results regarding htseq/kallisto/salmon.</p>
+
 <p>The bottom line is that the overlap between kallisto and HtSeq-count in calling differentially expressed genes is largest. Depending on the p-value treshold, there are about 10-20% called by only htseq or kallisto or salmon.
 About 2% are called by salmon and htseq or kallisto. The majority is called by all three methods and htseq and salmon together. The difference in choosing kallisto or htseq-count is about 15%. Because of the consistency of the differentially expressed genes with
 transcript estimations I will switch to kallisto for most future analyses. 
 </p>
-<p>The same samples are now being sequenced 125PE and we will see how this turns out. The optimum would be if somebody integrates kallisto and salmon
-into <a href="https://bitbucket.org/soccin/seqc">seqc</a> where a little bit of ground truth is known.
-</p>
 
 
 <h3>Alignment Statistics</h3>
+<p>Alignment statistics show a nice stranded undegraded preparation</p>
 <img src="theresaAlign/plotreaddistribution-1.jpg"/>
 <img src="theresaAlign/plotCoverage-1.jpg"/>
 <img src="theresaAlign/plotAnnotation-1.jpg"/>
 
 <h3>Scatter Plots</h3>
-
+<p>Scatter plots show high correlation between the different methods. Salmon and kallisto have the highest correlation for base mean, however, when comparing the p-values of differential expression, htseq-counts and kallisto are correlating better.</p>  
 
 <div class="chunk" id="basemean"><div class="rimage default"><img src="figure/basemean-1.png" title="plot of chunk basemean" alt="plot of chunk basemean" class="plot" /></div></div>
 
@@ -102,12 +101,18 @@ into <a href="https://bitbucket.org/soccin/seqc">seqc</a> where a little bit of 
 <div class="chunk" id="padj"><div class="rimage default"><img src="figure/padj-1.png" title="plot of chunk padj" alt="plot of chunk padj" class="plot" /></div></div>
 
 <h3>comparison diff expression</h3>
+<p>Testing for the intersections of differentially expressed called genes at different p-value tresholds, the overlap between kallisto and HtSeq-count is the largest. Depending on the p-value treshold, there are about 10-20% called by only htseq or kallisto or salmon.
+About 2% are called by salmon and htseq or kallisto. The majority is called by all three methods or htseq and salmon together. The difference between choosing kallisto or htseq-count is about 15%. Because of the consistency of the differentially expressed genes with
+transcript estimations I will switch to kallisto for most future analyses.
+</p>
 <div class="chunk" id="padj1"><div class="rimage default"><img src="figure/padj1-1.png" title="plot of chunk padj1" alt="plot of chunk padj1" class="plot" /></div></div>
 
 <div class="chunk" id="padj2"><div class="rimage default"><img src="figure/padj2-1.png" title="plot of chunk padj2" alt="plot of chunk padj2" class="plot" /></div></div>
 
 <div class="chunk" id="padj3"><div class="rimage default"><img src="figure/padj3-1.png" title="plot of chunk padj3" alt="plot of chunk padj3" class="plot" /></div></div>
-
+<h3>Summary</h3>
+HtSeq count and kallisto had most of the differentially called genes in common. This study is only anecdotal evidence because the ground truth is not known. The optimum would be if somebody integrates kallisto and salmon
+into <a href="https://bitbucket.org/soccin/seqc">seqc</a> where a little bit of ground truth is known.
 
 </body>
 </html>
