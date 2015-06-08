@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+  <title>Comparison differential gene expression with salmon, kallisto HTseq-count</title>
+</head>
+<body>
+
+
+
+
+<h3>Introduction</h3>
+
+<p>A single read 50 RNA-seq experiment (NEB, riboZero) was used to compare diffential expression with 3 strategies:  HtSeq-count-gene (union), salmon-gene and kallisto-gene.
+The reads were aligned to mm10 using star-aligner. Ensembl GRCh38 78 gtf was used as annotation. For salmon (non bias corrected) and kallisto the indices were
+generated from Homo_sapiens.GRCh38.cdna.all.fa.gz and Homo_sapiens.GRCh38.ncrna.fa.gz.
+The experiment consisted of 4 conditions with 2 replicates each. Gene counts were derived from kallisto with a home made script by summing estimated counts/transcripts per gene.
+Differential expression was called using DESeq2.</p>
+<p>Only the comparison for one condition is shown. The other conditions had similar results regarding htseq/kallisto/salmon.</p>
+<p>The bottom line is that the overlap between kallisto and HtSeq-count in calling differentially expressed genes is largest. Depending on the p-value treshold, there are about 10-20% called by only htseq or kallisto or salmon.
+About 2% are called by salmon and htseq or kallisto. The majority is called by all three methods and htseq and salmon together. The difference in choosing kallisto or htseq-count is about 15%. Because of the consistency of the differentially expressed genes with
+transcript estimations I will switch to kallisto for most future analyses. 
+</p>
+<p>The same samples are now being sequenced 125PE and we will see how this turns out. The optimum would be if somebody integrates kallisto and salmon
+into <a href="https://bitbucket.org/soccin/seqc">seqc</a> where a little bit of ground truth is known.
+</p>
+
+
+<h3>Alignment Statistics</h3>
+<img src="theresaAlign/plotreaddistribution-1.jpg"/>
+<img src="theresaAlign/plotCoverage-1.jpg"/>
+<img src="theresaAlign/plotAnnotation-1.jpg"/>
+
+<h3>Scatter Plots</h3>
+
+
+<div class="chunk" id="basemean"><div class="rimage default"><img src="figure/basemean-1.png" title="plot of chunk basemean" alt="plot of chunk basemean" class="plot" /></div></div>
+
+<div class="chunk" id="log2fc"><div class="rimage default"><img src="figure/log2fc-1.png" title="plot of chunk log2fc" alt="plot of chunk log2fc" class="plot" /></div></div>
+
+<div class="chunk" id="padj"><div class="rimage default"><img src="figure/padj-1.png" title="plot of chunk padj" alt="plot of chunk padj" class="plot" /></div></div>
+
+<h3>comparison diff expression</h3>
+<div class="chunk" id="padj1"><div class="rimage default"><img src="figure/padj1-1.png" title="plot of chunk padj1" alt="plot of chunk padj1" class="plot" /></div></div>
+
+<div class="chunk" id="padj2"><div class="rimage default"><img src="figure/padj2-1.png" title="plot of chunk padj2" alt="plot of chunk padj2" class="plot" /></div></div>
+
+<div class="chunk" id="padj3"><div class="rimage default"><img src="figure/padj3-1.png" title="plot of chunk padj3" alt="plot of chunk padj3" class="plot" /></div></div>
+
+
+</body>
+</html>
+
+
